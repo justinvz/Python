@@ -73,4 +73,4 @@ def quadraticSolve(a, b, c):
     print("discriminante: ", D)
     print("oplossing 1: ", x1, "oplossing 2:", x2)
     
-#quadraticSolve(1,0,5)
+quadraticSolve(1,0,5)
