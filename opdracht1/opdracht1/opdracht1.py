@@ -1,8 +1,12 @@
 import math
 
+#opdracht 1 python
+
+
 uur = 3600
 minuut = 60
 
+#1.1
 #input: uren, minuten en seconden output: seconden
 def time(uren, minuten, seconden):
     tijd = (uren*uur) + (minuten*minuut) + (seconden)
@@ -25,6 +29,7 @@ def inv_time(tijd):
 #print("inv_time ", inv_time(8000))
 #print("time ", time(3,20,40))
 
+#1.2
 def rad2degree(rad):
     pi = math.pi
     degree = (rad/(2*pi))*360
@@ -37,7 +42,6 @@ def degree2rad(degree):
 
 #print(rad2degree(3.14))
 #print(degree2rad(180))
-
 
 def rpm2hz(rpm):
     hz = rpm/60
@@ -54,11 +58,13 @@ def hz2rpm(hz):
 
 
 
-#ax^2 + bx + c
-#
 
+#input is an quadratic formula like this: #ax^2 + bx + c.
+#anwsers can be displayed in the real and complex domain.
+
+#1.3
 def quadraticSolve(a, b, c):
-
+    """Solves a quadratic formula. expects a input of ax^2 + bx + c: quadraticSolve(a,b,c)"""
     D = (b**2 - (4 * a * c))
 
     if(D > 0):
@@ -74,3 +80,4 @@ def quadraticSolve(a, b, c):
     print("oplossing 1: ", x1, "oplossing 2:", x2)
     
 quadraticSolve(1,0,5)
+
