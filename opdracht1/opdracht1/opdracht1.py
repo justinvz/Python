@@ -1,4 +1,5 @@
 import math
+import operator as op
 
 #opdracht 1 python
 
@@ -79,5 +80,32 @@ def quadraticSolve(a, b, c):
     print("discriminante: ", D)
     print("oplossing 1: ", x1, "oplossing 2:", x2)
     
-quadraticSolve(1,0,5)
+#quadraticSolve(1,0,5)
 
+def truthTable(x):
+    if x == "and":
+        print("A     | B    |",x)
+        print("False | False|",op.and_(False,False))
+        print("True  | False|",op.and_(True,False))
+        print("False | True |",op.and_(False,True))
+        print("True  | True |",op.and_(True,True))
+        
+    if x == "or":
+        print("A     | B    |",x)
+        print("False | False|",op.or_(False,False))
+        print("True  | False|",op.or_(True,False))
+        print("False | True |",op.or_(False,True))
+        print("True  | True |",op.or_(True,True))
+        
+    if x == "xor":
+        print("A     | B    |",x)
+        print("False | False|",op.xor(False,False))
+        print("True  | False|",op.xor(True,False))
+        print("False | True |",op.xor(False,True))
+        print("True  | True |",op.xor(True,True))
+
+
+truthTable("and")
+
+def truthTableFruitfull(x):
+    if x = "op.and_":
