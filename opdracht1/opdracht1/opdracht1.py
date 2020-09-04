@@ -104,16 +104,24 @@ def truthTable(x):
         print("False | True |",op.xor(False,True))
         print("True  | True |",op.xor(True,True))
 
+def fruitfullTruthTable(logicOperator):
+    """"Input is a logic operator, outputs the truth table fruitfullTruthTable(logicOperator) """
+    ff = False,False,logicOperator(False,False)
+    tf = True,False,logicOperator(True,False)
+    ft = False,True,logicOperator(False,True)
+    tt = True,True,logicOperator(True,True)
 
+    return ff,tf,ft,tt
+
+
+def kwadraad(x):
+   x = x**2
+   return x
 
 #f(x) = (f(x) - f(x-h))/h when lim h -> 0
 
-def derevative(function,x,h= 1e-10):
-    
+def derevative(function,x,h= 1e-12):
+    """"Differentiat the given function. derevative(function, x value, delta h) """
     d = (function(x) - function(x-h))/h
-
-    
-    print("input: ", function(x))
-    print("output: ", d)
-
+    return d
 
