@@ -15,14 +15,13 @@ import operator as op
 #quadraticSolve()
 #truthTable()
 
-
 #1.1
 def time(hours, minutes, seconds):
     """Input time(hour, minut, second) Output seconds"""
     hour = 3600
     minute = 60
     elapsedSec = (hours*hour) + (minutes*minute) + (seconds)
-    return ("aantal seconden: ", elapsedSec)
+    return ("seconds: ", elapsedSec)
 
 #input: seconden output: uren minuten en seconden
 def inv_time(seconds):
@@ -50,6 +49,7 @@ def degree2rad(degree):
     """Input degree radians, output radians"""
     pi = math.pi
     rad = (degree/360)*(2*pi)
+    
     return rad
 
 def rpm2hz(rpm):
@@ -104,5 +104,16 @@ def truthTable(x):
         print("False | True |",op.xor(False,True))
         print("True  | True |",op.xor(True,True))
 
+
+
+#f(x) = (f(x) - f(x-h))/h when lim h -> 0
+
+def derevative(function,x,h= 1e-10):
+    
+    d = (function(x) - function(x-h))/h
+
+    
+    print("input: ", function(x))
+    print("output: ", d)
 
 
