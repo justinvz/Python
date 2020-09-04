@@ -106,6 +106,3 @@ def truthTable(x):
 
 
 truthTable("and")
-
-def truthTableFruitfull(x):
-    if x = "op.and_":
