@@ -2,66 +2,65 @@ import math
 import operator as op
 
 #opdracht 1 python
+#Functions: use help(function) 
+#1.1
+#time()
+#inv_time()
+#1.2
+#rad2degree()
+#degree2rad()
+#rpm2hz()
+#hz2rpm()
+#1.3
+#quadraticSolve()
+#truthTable()
 
-
-uur = 3600
-minuut = 60
 
 #1.1
-#input: uren, minuten en seconden output: seconden
-def time(uren, minuten, seconden):
-    tijd = (uren*uur) + (minuten*minuut) + (seconden)
-    return ("aantal seconden: ", tijd)
+def time(hours, minutes, seconds):
+    """Input time(hour, minut, second) Output seconds"""
+    hour = 3600
+    minute = 60
+    elapsedSec = (hours*hour) + (minutes*minute) + (seconds)
+    return ("aantal seconden: ", elapsedSec)
 
 #input: seconden output: uren minuten en seconden
-def inv_time(tijd):
-    uren = 0
-    minuten = 0
+def inv_time(seconds):
+    """Input inv_time(seconds) Outputs hours, minuts, seconds """
+    hour = 3600
+    minut = 60
+    hours = 0
+    minutes = 0
+    if(seconds >= hour): hours = seconds/hour
+    seconds = seconds - int(hours)*hour
+
+    if(seconds >= minut): minutes = seconds/minut
+    seconds = seconds - int(minutes)* minut
     
-    if(tijd >= uur): uren = tijd/uur
-    tijd = tijd - int(uren)*uur
-
-    if(tijd >= minuut): minuten = tijd/minuut
-    tijd = tijd - int(minuten)* minuut
-    
-    return('Aantal uren: ', int(uren),"aantal minuten: ", int(minuten),"aantal seconden: ", tijd)
-
-
-#print("inv_time ", inv_time(8000))
-#print("time ", time(3,20,40))
+    return('hours: ', int(hours),"minutes: ", int(minutes),"seconds: ", seconds)
 
 #1.2
 def rad2degree(rad):
+    """Input radians, output Degree"""
     pi = math.pi
     degree = (rad/(2*pi))*360
     return degree
 
 def degree2rad(degree):
+    """Input degree radians, output radians"""
     pi = math.pi
     rad = (degree/360)*(2*pi)
     return rad
 
-#print(rad2degree(3.14))
-#print(degree2rad(180))
-
 def rpm2hz(rpm):
+    """Input rpm, output hertz"""
     hz = rpm/60
     return hz
 
 def hz2rpm(hz):
+    """Input hertz, output rpm"""
     rpm = hz*60
     return rpm
-
-
-#print(rpm2hz(60))
-#print(hz2rpm(1))
-
-
-
-
-
-#input is an quadratic formula like this: #ax^2 + bx + c.
-#anwsers can be displayed in the real and complex domain.
 
 #1.3
 def quadraticSolve(a, b, c):
@@ -78,11 +77,12 @@ def quadraticSolve(a, b, c):
         x1 = x2 = (-b / (2 * a))
 
     print("discriminante: ", D)
-    print("oplossing 1: ", x1, "oplossing 2:", x2)
+    print("solution 1: ", x1, "Solution 2:", x2)
     
-#quadraticSolve(1,0,5)
+
 
 def truthTable(x):
+    """Inputs a logic operator en outputs the truth table of it. 'and' 'or' 'xor' """
     if x == "and":
         print("A     | B    |",x)
         print("False | False|",op.and_(False,False))
@@ -105,4 +105,4 @@ def truthTable(x):
         print("True  | True |",op.xor(True,True))
 
 
-truthTable("and")
+
