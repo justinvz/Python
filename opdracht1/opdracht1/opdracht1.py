@@ -108,7 +108,7 @@ def truthTable(x):
         print("True  | True |",op.xor(True,True))
 
 def fruitfullTruthTable(logicOperator, argument):
-    """"Input is a logic operator, outputs the truth table fruitfullTruthTable(logicOperator) """
+    """"Input is a logic operator, outputs the truth table fruitfullTruthTable(and_) """
     if argument == 2:
         ff = False,False,logicOperator(False,False)
         tf = True,False,logicOperator(True,False)
@@ -116,16 +116,14 @@ def fruitfullTruthTable(logicOperator, argument):
         tt = True,True,logicOperator(True,True)
         return ff,tf,ft,tt
     elif argument == 3:
-        fff = False,False,logicOperator(False,False)
-        tff = True,False,logicOperator(True,False)
-        ftf = False,True,logicOperator(False,True)
-        fft = True,True,logicOperator(True,True)
-        ttf
-        ftf
-        fft
-        
-        
-        return 
+        fff = False,False, False,logicOperator(False,False,False)
+        tff = True,False, False,logicOperator(True,False,False)
+        ttf = True,True, False,logicOperator(True,True,False)
+        ttt = True,True, True,logicOperator(True,True,True)
+       
+
+    
+        return fff,tff
 
 
 def trippleAnd(a, b, c):
