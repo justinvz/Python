@@ -2,20 +2,23 @@ import math
 import operator as op
 
 #opdracht 1 python
-#Functions: use help(function) 
-#1.1
-#time()
-#inv_time()
-#1.2
-#rad2degree()
-#degree2rad()
-#rpm2hz()
-#hz2rpm()
-#1.3
-#quadraticSolve()
-#truthTable()
+#Functions: use help(function) for examples
 
 #1.1
+#time(hours, minuts, seconds)
+#inv_time(seconds)
+#1.2
+#rad2degree(radians)
+#degree2rad(degrees)
+#rpm2hz(rpm)
+#hz2rpm(hertz)
+#1.3
+#quadraticSolve(a,b,c)
+#truthTable(xor)
+#fruitfullTruthTable(op.xor)
+#derevative(function, x_value, deltaH)
+
+#1.1s
 def time(hours, minutes, seconds):
     """Input time(hour, minut, second) Output seconds"""
     hour = 3600
@@ -104,15 +107,47 @@ def truthTable(x):
         print("False | True |",op.xor(False,True))
         print("True  | True |",op.xor(True,True))
 
-def fruitfullTruthTable(logicOperator):
+def fruitfullTruthTable(logicOperator, argument):
     """"Input is a logic operator, outputs the truth table fruitfullTruthTable(logicOperator) """
-    ff = False,False,logicOperator(False,False)
-    tf = True,False,logicOperator(True,False)
-    ft = False,True,logicOperator(False,True)
-    tt = True,True,logicOperator(True,True)
+    if argument == 2:
+        ff = False,False,logicOperator(False,False)
+        tf = True,False,logicOperator(True,False)
+        ft = False,True,logicOperator(False,True)
+        tt = True,True,logicOperator(True,True)
+        return ff,tf,ft,tt
+    elif argument == 3:
+        fff = False,False,logicOperator(False,False)
+        tff = True,False,logicOperator(True,False)
+        ftf = False,True,logicOperator(False,True)
+        fft = True,True,logicOperator(True,True)
+        ttf
+        ftf
+        fft
+        
+        
+        return 
 
-    return ff,tf,ft,tt
 
+def trippleAnd(a, b, c):
+    if a and b and c:
+        return True
+    else:
+        return False
+
+def trippleOr(a,b,c):
+    if a or b or c:
+        return True
+    else:
+        return False
+
+def trippleXor(a,b,c):
+    if a == b == c:
+        return False
+    else:
+        return True
+
+
+        
 
 def kwadraad(x):
    x = x**2
