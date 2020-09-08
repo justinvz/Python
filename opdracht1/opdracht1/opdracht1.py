@@ -107,25 +107,6 @@ def truthTable(x):
         print("False | True |",op.xor(False,True))
         print("True  | True |",op.xor(True,True))
 
-def fruitfullTruthTable(logicOperator, argument):
-    """"Input is a logic operator, outputs the truth table fruitfullTruthTable(and_) """
-    if argument == 2:
-        ff = False,False,logicOperator(False,False)
-        tf = True,False,logicOperator(True,False)
-        ft = False,True,logicOperator(False,True)
-        tt = True,True,logicOperator(True,True)
-        return ff,tf,ft,tt
-    elif argument == 3:
-        fff = False,False, False,logicOperator(False,False,False)
-        tff = True,False, False,logicOperator(True,False,False)
-        ttf = True,True, False,logicOperator(True,True,False)
-        ttt = True,True, True,logicOperator(True,True,True)
-       
-
-    
-        return fff,tff
-
-
 def trippleAnd(a, b, c):
     if a and b and c:
         return True
@@ -144,6 +125,24 @@ def trippleXor(a,b,c):
     else:
         return True
 
+def fruitfullTruthTable(logicOperator, argument):
+    """"Input is a logic operator, outputs the truth table fruitfullTruthTable(Logicoperator, arguments). argument = 2: and_, or_, xor argument = 3: trippleAnd, trippleOr, trippleXor """
+    if argument == 2:
+        ff = False,False,logicOperator(False,False)
+        tf = True,False,logicOperator(True,False)
+        ft = False,True,logicOperator(False,True)
+        tt = True,True,logicOperator(True,True)
+        return ff,tf,ft,tt
+    elif argument == 3:
+        fff = False,False, False,logicOperator(False,False,False)
+        tff = True,False, False,logicOperator(True,False,False)
+        ftf = False,True, False,logicOperator(False,True,False)
+        ttf = True,True, False,logicOperator(True,True,False)
+        fft = False,False, True,logicOperator(False,False,True)
+        tft = True,False, True,logicOperator(True,False,True)
+        ftt = False,True, True,logicOperator(False,True,True)
+        ttt = True,True, True,logicOperator(True,True,True)
+        return fff,tff,ftf,ttf,fft,tft,ftt,ttt
 
         
 
