@@ -42,6 +42,7 @@ def inv_time(seconds):
     return('hours: ', int(hours),"minutes: ", int(minutes),"seconds: ", seconds)
 
 #1.2
+#A
 def rad2degree(rad):
     """Input radians, output Degree"""
     pi = math.pi
@@ -54,7 +55,7 @@ def degree2rad(degree):
     rad = (degree/360)*(2*pi)
     
     return rad
-
+#B
 def rpm2hz(rpm):
     """Input rpm, output hertz"""
     hz = rpm/60
@@ -81,9 +82,8 @@ def quadraticSolve(a, b, c):
 
     print("discriminante: ", D)
     print("solution 1: ", x1, "Solution 2:", x2)
-    
-
-
+#1.4
+#A & B
 def truthTable(x):
     """Inputs a logic operator en outputs the truth table of it. 'and' 'or' 'xor' """
     if x == "and":
@@ -124,7 +124,7 @@ def trippleXor(a,b,c):
         return False
     else:
         return True
-
+#1,4 C & D
 def fruitfullTruthTable(logicOperator, argument):
     """"Input is a logic operator, outputs the truth table fruitfullTruthTable(Logicoperator, arguments). argument = 2: and_, or_, xor argument = 3: trippleAnd, trippleOr, trippleXor """
     if argument == 2:
@@ -143,17 +143,22 @@ def fruitfullTruthTable(logicOperator, argument):
         ftt = False,True, True,logicOperator(False,True,True)
         ttt = True,True, True,logicOperator(True,True,True)
         return fff,tff,ftf,ttf,fft,tft,ftt,ttt
-
-        
-
-def kwadraad(x):
-   x = x**2
-   return x
-
-#f(x) = (f(x) - f(x-h))/h when lim h -> 0
-
+#1.5
+#A
 def derevative(function,x,h= 1e-12):
     """"Differentiat the given function. derevative(function, x value, delta h) """
     d = (function(x) - function(x-h))/h
     return d
+#B F(x)  = F(x−h) + ∆F(x)
+def euler_backward_deltaF(function,x,h=1e-6):
+    return function(x)*h
 
+
+def intergral(function,x1,x2,h=1e-6,deltaF = euler_backward_deltaF):
+    
+    
+    deltaF(function,x2)
+
+
+    return 0
+#1.6
