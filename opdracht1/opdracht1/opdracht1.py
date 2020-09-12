@@ -17,7 +17,9 @@ import operator as op
 #truthTable(xor)
 #fruitfullTruthTable(op.xor)
 #derevative(function, x_value, deltaH)
-
+#1.4
+#1.5
+#1.6
 #1.1s
 def time(hours, minutes, seconds):
     """Input time(hour, minut, second) Output seconds"""
@@ -155,6 +157,7 @@ def euler_backward_deltaF(function,x,h=1e-6):
 
 
 def euler(function,x1,x2,h=1e-3,deltaF = euler_backward_deltaF):
+    """input euler(function,x1,x2 h, delftaF"""
     if x1 < x2:
         low = x1
         high = x2
@@ -173,6 +176,26 @@ def euler(function,x1,x2,h=1e-3,deltaF = euler_backward_deltaF):
 
 
 #1.6
-
-print(euler(math.sin,math.pi,2*math.pi))
-
+def atan2(y, x, eps =1e-10):
+    """atan2(y,x,eps) """
+    if abs(y) < eps:
+        if x > 0:
+            return 0
+        if x < 0:
+            return math.pi
+    elif abs(x) < eps:
+        if y > 0:
+            return 1/2*math.pi
+        if y < 0:
+            return 3/2*math.pi
+    elif abs(x) < eps and  abs(y) < eps:
+        return 0
+    else:
+        if x>0 and y>0:
+           return math.atan(abs(y)/abs(x))
+        if x<0 and y>0: 
+           return math.pi - math.atan(abs(y)/abs(x))
+        if x<0 and y<0: 
+           return -math.pi - math.atan(abs(y)/abs(x))
+        if x>0 and y<0: 
+           return -math.atan(abs(y)/abs(x))
