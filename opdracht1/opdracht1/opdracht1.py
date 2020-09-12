@@ -154,20 +154,25 @@ def euler_backward_deltaF(function,x,h=1e-6):
     return function(x)*h
 
 
-def euler(function,x1,x2,h=1e-4,deltaF = euler_backward_deltaF):
-    
-    n = (x2 - x1)/h
-    
+def euler(function,x1,x2,h=1e-3,deltaF = euler_backward_deltaF):
+    if x1 < x2:
+        low = x1
+        high = x2
+    elif x1 > x2:
+        low = x2
+        high = x1
+    elif x1 == x2:
+        return "wrong input"
+    n = (high-low)/h
     intergral = 0
-
-    for x in range(int(n)):
-        dx = x*h
-        intergral += function(dx)*h
-        print(intergral)
+    for dx in range(int(n)):       
+        fx = low + (dx)*h
+        intergral += function(fx)*h
+        print(intergral,fx)
     return intergral
 
 
 #1.6
 
-print(euler(math.sin,0,math.pi))
+print(euler(math.sin,math.pi,2*math.pi))
 
