@@ -20,7 +20,10 @@ import operator as op
 #1.4
 #1.5
 #1.6
-#1.1s
+#1.1
+
+
+
 def time(hours, minutes, seconds):
     """Input time(hour, minut, second) Output seconds"""
     hour = 3600
@@ -151,27 +154,28 @@ def derevative(function,x,h= 1e-12):
     """"Differentiat the given function. derevative(function, x value, delta h) """
     d = (function(x) - function(x-h))/h
     return d
-#B F(x)  = F(x−h) + ∆F(x)
+#B
+
 def euler_backward_deltaF(function,x,h=1e-6):
     return function(x)*h
 
 
-def euler(function,x1,x2,h=1e-3,deltaF = euler_backward_deltaF):
+def euler(function,x1,x2,h=1e-5,deltaF = euler_backward_deltaF):
     """input euler(function,x1,x2 h, delftaF"""
-    if x1 < x2:
-        low = x1
-        high = x2
-    elif x1 > x2:
-        low = x2
-        high = x1
+
+    if x1 > x2:
+        x1,x2 = x2,x1
     elif x1 == x2:
-        return "wrong input"
-    n = (high-low)/h
+        return False
+    n = (x2-x1)/h
     intergral = 0
     for dx in range(int(n)):       
-        fx = low + (dx)*h
+        fx = x1 + (dx)*h
         intergral += function(fx)*h
-        print(intergral,fx)
+        print(intergral)
+    if abs(intergral) < 1e-10:
+        return 0
+
     return intergral
 
 
