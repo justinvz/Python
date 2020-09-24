@@ -29,7 +29,7 @@ def time(hours, minutes, seconds):
     hour = 3600
     minute = 60
     elapsedSec = (hours*hour) + (minutes*minute) + (seconds)
-    return ("seconds: ", elapsedSec)
+    return elapsedSec
 
 #input: seconden output: uren minuten en seconden
 def inv_time(seconds):
@@ -44,7 +44,7 @@ def inv_time(seconds):
     if(seconds >= minut): minutes = seconds/minut
     seconds = seconds - int(minutes)* minut
     
-    return('hours: ', int(hours),"minutes: ", int(minutes),"seconds: ", seconds)
+    return(hours, minuts, seconds)
 
 #1.2
 #A
@@ -84,9 +84,8 @@ def quadraticSolve(a, b, c):
         x2 = complex((-b/(2 * a)), - ((math.sqrt(abs(D)))/(2 * a)))
     elif(D == 0):
         x1 = x2 = (-b / (2 * a))
+    return x1, x2
 
-    print("discriminante: ", D)
-    print("solution 1: ", x1, "Solution 2:", x2)
 #1.4
 #A & B
 def truthTable(x):
@@ -166,7 +165,7 @@ def euler(function,x1,x2,h=1e-5,deltaF = euler_backward_deltaF):
     if x1 > x2:
         x1,x2 = x2,x1
     elif x1 == x2:
-        return False
+        return 0
     n = (x2-x1)/h
     intergral = 0
     for dx in range(int(n)):       
