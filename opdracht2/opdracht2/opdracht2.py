@@ -1,7 +1,7 @@
 import math
 
 
-class robot:
+class Robot:
     """Robot"""
 
 
@@ -17,7 +17,7 @@ class robot:
         print(self.oriant)
 
     def pose(self):
-        print(round(self.x,2),round(self.y,2),round(self.oriant,2))
+        print("x: %.2f  y: %.2f oriantation: %.2f" %self.x, self.y, self.oriant)
 
     def foward(self, distance):
         self.y += distance * math.sin(self.oriant)
@@ -47,8 +47,22 @@ def distance(robot1, robot2):
     dy = robot1.y - robot2.y
     return (dx**2+dy**2)**0.5
 
-for i in range(10):
-    roboti = robot()
-    print(i)
+def iniRobots(list):
+    k = -1
+    row = 0
+
+    for i in range(100):
+        list.append(i)
+        list[i] = Robot()
+        list[i].oriant = math.pi/2
+        k += 1
+        if (k == 10):
+            row += 1
+            k = 0
+        list[i].x = k*2
+        list[i].y = row*2
+
+robots = []
+iniRobots(robots)
 
 
