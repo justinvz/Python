@@ -1,4 +1,7 @@
 import math
+import random
+import time
+
 
 
 class Robot:
@@ -11,13 +14,13 @@ class Robot:
         self.oriant = oriant
 
     def position(self):
-        print(self.x,self.y)
+        return self.x,self.y
 
     def orientation(self):
-        print(self.oriant)
+        return self.oriant
 
     def pose(self):
-        print("x: %.2f  y: %.2f oriantation: %.2f" %self.x, self.y, self.oriant)
+        return "x: %.2f  y: %.2f oriantation: %.2f" % (self.x, self.y, self.oriant)
 
     def foward(self, distance):
         self.y += distance * math.sin(self.oriant)
@@ -47,22 +50,36 @@ def distance(robot1, robot2):
     dy = robot1.y - robot2.y
     return (dx**2+dy**2)**0.5
 
-def iniRobots(list):
+def iniRobots(rList):
     k = -1
     row = 0
 
     for i in range(100):
-        list.append(i)
-        list[i] = Robot()
-        list[i].oriant = math.pi/2
+        rList.append(i)
+        rList[i] = Robot()
+        rList[i].oriant = math.pi/2
         k += 1
         if (k == 10):
             row += 1
             k = 0
-        list[i].x = k*2
-        list[i].y = row*2
+        rList[i].x = k*2
+        rList[i].y = row*2
+
+def random_pose(rList):
+    for i in range(100):
+        rList[i].x = random.uniform(0,100)
+        rList[i].y = random.uniform(0,100)
+        #rList[i].oriant = random.uniform(0,2*math.pi)
+    
+def get_pose(rList):
+    poseList = []
+    for i in range(100):
+        poseList.append(i)
+        poseList[i] = rList[i].pose()
+    return poseList
+
 
 robots = []
 iniRobots(robots)
-
-
+random_pose(robots)
+print(get_pose(robots))
