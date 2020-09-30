@@ -65,8 +65,8 @@ def iniRobots(rList):
         rList[i].x = k*2
         rList[i].y = row*2
 
-def random_pose(rList):
-    for i in range(100):
+def random_pose(rList, x = 100):
+    for i in range(x):
         rList[i].x = random.uniform(0,100)
         rList[i].y = random.uniform(0,100)
         #rList[i].oriant = random.uniform(0,2*math.pi)
@@ -78,8 +78,24 @@ def get_pose(rList):
         poseList[i] = rList[i].pose()
     return poseList
 
+def random_oriant(rList):
+
+    for i in range(100):
+        rList[i].oriant = random.uniform(0,2*math.pi)
+
+
+def shuffle_pose(rList):
+    robo = 0
+    print(robo)
+    while(robo < 10):
+        print("loop")
+        random_pose(rList, 10)
+        robo += 1
+        time.sleep(1)
 
 robots = []
 iniRobots(robots)
-random_pose(robots)
-print(get_pose(robots))
+#random_pose(robots)
+#print(get_pose(robots))
+#random_oriant(robots)   
+shuffle_pose(robots)
