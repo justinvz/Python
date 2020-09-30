@@ -1,6 +1,7 @@
 import math
 import random
 import time
+import threading
 
 
 
@@ -91,11 +92,20 @@ def shuffle_pose(rList):
         print("loop")
         random_pose(rList, 10)
         robo += 1
-        time.sleep(1)
+
+def wait_seccond():
+    print("wait for 1 second")
+    time.sleep(1)
+
 
 robots = []
 iniRobots(robots)
 #random_pose(robots)
+
 #print(get_pose(robots))
 #random_oriant(robots)   
+
+
+t = threading.Thread(target=wait_seccond)
+
 shuffle_pose(robots)
