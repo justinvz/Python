@@ -4,6 +4,12 @@ import time
 import threading
 
 
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+
+
 
 class Robot:
     """Robot"""
@@ -66,11 +72,11 @@ def iniRobots(rList):
         rList[i].x = k*2
         rList[i].y = row*2
 
-def random_pose(rList, x=100, y=0):
+def random_pose(rList, x=0, y=100):
     for x in range(y):
-        rList[i].x = random.uniform(0,100)
-        rList[i].y = random.uniform(0,100)
-        #rList[i].oriant = random.uniform(0,2*math.pi)
+        rList[x].x = int(random.uniform(0,100))
+        rList[x].y = int(random.uniform(0,100))
+        #rList[x].oriant = random.uniform(0,2*math.pi)
     
 def get_pose(rList):
     poseList = []
@@ -78,6 +84,7 @@ def get_pose(rList):
         poseList.append(i)
         poseList[i] = rList[i].pose()
     return poseList
+
 
 def random_oriant(rList):
 
@@ -90,40 +97,34 @@ def shuffle_pose(rList):
     x = 0
     y = 0
     while(robo < 20):
-        random_pose(rList, x, y)
+        x = robo*5
+        y = x + 5
+        random_pose(rList, x, y)   
+        print("------------------------itteration: %d------------------------"% robo)    
         robo += 1
-        x = int(random.uniform(0, 90))
-        y = x + 10
-        print("iterations: %d"%robo)
         time.sleep(1)
 
-def thread_shuffle_pose(rList):
-    thread = threading.Thread(target=shuffle_pose, args=[rList])
-    thread.start()
-    thread.join()
 
+
+#start counter
 t = time.perf_counter()
 
+
+#creating list if robots
 robots = []
 iniRobots(robots)
 
-
-for i in range(100):
-    print(get_pose(robots)[i])
-
-
-print("-----------------random-----------------")
-
-thread_shuffle_pose(robots)
-
-for i in range(100):
-    print(get_pose(robots)[i])
-
-
+#threading shuffle function so my program can run multiple thing at a time.
+thread = threading.Thread(target=shuffle_pose, args=[robots])
+thread.start()
+thread.join()
 
 #print(get_pose(robots))
 #random_oriant(robots)   
-#thread_shuffle_pose(robots)
+
+for i in range(100):
+     print(i,get_pose(robots)[i])
+
 
 print("ellepse time %f" % (time.perf_counter() - t))
 
