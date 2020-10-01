@@ -66,8 +66,8 @@ def iniRobots(rList):
         rList[i].x = k*2
         rList[i].y = row*2
 
-def random_pose(rList, x = 100):
-    for i in range(x):
+def random_pose(rList, x=100, y=0):
+    for x in range(y):
         rList[i].x = random.uniform(0,100)
         rList[i].y = random.uniform(0,100)
         #rList[i].oriant = random.uniform(0,2*math.pi)
@@ -87,25 +87,43 @@ def random_oriant(rList):
 
 def shuffle_pose(rList):
     robo = 0
-    print(robo)
-    while(robo < 10):
-        print("loop")
-        random_pose(rList, 10)
+    x = 0
+    y = 0
+    while(robo < 20):
+        random_pose(rList, x, y)
         robo += 1
+        x = int(random.uniform(0, 90))
+        y = x + 10
+        print("iterations: %d"%robo)
+        time.sleep(1)
 
-def wait_seccond():
-    print("wait for 1 second")
-    time.sleep(1)
+def thread_shuffle_pose(rList):
+    thread = threading.Thread(target=shuffle_pose, args=[rList])
+    thread.start()
+    thread.join()
 
+t = time.perf_counter()
 
 robots = []
 iniRobots(robots)
-#random_pose(robots)
+
+
+for i in range(100):
+    print(get_pose(robots)[i])
+
+
+print("-----------------random-----------------")
+
+thread_shuffle_pose(robots)
+
+for i in range(100):
+    print(get_pose(robots)[i])
+
+
 
 #print(get_pose(robots))
 #random_oriant(robots)   
+#thread_shuffle_pose(robots)
 
+print("ellepse time %f" % (time.perf_counter() - t))
 
-t = threading.Thread(target=wait_seccond)
-
-shuffle_pose(robots)
