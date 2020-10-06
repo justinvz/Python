@@ -104,27 +104,64 @@ def shuffle_pose(rList):
         robo += 1
         time.sleep(1)
 
+def plot(robots):
+
+    robots_x = []
+    robots_y = []
+    robots_oriant = []
+
+    for i in range(100):
+        robots_x.append(i)
+        robots_y.append(i)
+        robots_oriant.append(i)
+
+        robots_x[i] = robots[i].x
+        robots_y[i] = robots[i].y
+        robots_oriant[i] = robots[i].oriant
 
 
-#start counter
+    robots_y = np.array(robots_y)
+    robots_x = np.array(robots_x)
+    robots_oriant = np.array(robots_oriant)
+
+
+    X = robots_x
+    Y = robots_y
+    U = np.cos(robots_oriant)
+    V = np.sin(robots_oriant)
+
+    fig, ax = plt.subplots()
+    q = ax.quiver(X, Y, U, V)
+    ax.quiverkey(q, X=2, Y=10, U=10,
+                 label='Quiver key, length = 10', labelpos='E')
+    plt.show()
+
+    print("ellepse time %f" % (time.perf_counter() - t))
+
+
+        #start counter
+
 t = time.perf_counter()
 
 
-#creating list if robots
+        #creating list if robots
+
 robots = []
 iniRobots(robots)
 
-#threading shuffle function so my program can run multiple thing at a time.
-thread = threading.Thread(target=shuffle_pose, args=[robots])
-thread.start()
-thread.join()
+        #threading shuffle function so my program can run multiple thing at a time.
 
-#print(get_pose(robots))
-#random_oriant(robots)   
+#thread = threading.Thread(target=shuffle_pose, args=[robots])
+#thread.start()
+#thread.join()
+
+        #Print posistions
 
 for i in range(100):
-     print(i,get_pose(robots)[i])
+    print(i,get_pose(robots)[i])
 
-
-print("ellepse time %f" % (time.perf_counter() - t))
+        #creating numpy array from object lists
+random_oriant(robots)
+        #plot robots
+plot(robots)
 
