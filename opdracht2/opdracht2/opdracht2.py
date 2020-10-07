@@ -3,13 +3,8 @@ import random
 import time
 import threading
 
-
 import numpy as np
 import matplotlib.pyplot as plt
-
-
-
-
 
 class Robot:
     """Robot"""
@@ -36,15 +31,13 @@ class Robot:
     def rotate(self, radian):
         self.oriant += radian
 
-    def change_pose(self,x,y,oriant):
-        self.x = x;
-        self.y = y;
-        self.oriant = oriant;
+    def change_pose(self,x,y,oriant): #Moet nog aangepast worden. houd geen rekening met de huidige oriantatie
+        self.x += x;
+        self.y += y;
 
     def reset_pose(self,x,y,oriant):
         self.x = x;
         self.y = y;
-        self.oriant = oriant;
     
     def disbetween(self, robot):
         dx = self.x - robot.x
@@ -85,12 +78,10 @@ def get_pose(rList):
         poseList[i] = rList[i].pose()
     return poseList
 
-
 def random_oriant(rList):
 
     for i in range(100):
         rList[i].oriant = random.uniform(0,2*math.pi)
-
 
 def shuffle_pose(rList):
     robo = 0
@@ -106,6 +97,8 @@ def shuffle_pose(rList):
 
 def plot(robots):
 
+    #create numpy array's
+
     robots_x = []
     robots_y = []
     robots_oriant = []
@@ -120,24 +113,24 @@ def plot(robots):
         robots_oriant[i] = robots[i].oriant
 
 
-    robots_y = np.array(robots_y)
-    robots_x = np.array(robots_x)
-    robots_oriant = np.array(robots_oriant)
 
-
-    X = robots_x
-    Y = robots_y
-    U = np.cos(robots_oriant)
-    V = np.sin(robots_oriant)
-
+    #Plot
     fig, ax = plt.subplots()
+
+    X = np.array(robots_x)
+    Y = np.array(robots_y)
+    U = np.cos(np.array(robots_oriant))
+    V = np.sin(np.array(robots_oriant))
+
     q = ax.quiver(X, Y, U, V)
-    ax.quiverkey(q, X=2, Y=10, U=10,
-                 label='Quiver key, length = 10', labelpos='E')
+   
+   
+    #label's
+    #ax.quiverkey(q, X=0.3, Y=1.1, U=1, label='Robots', labelpos='E')
+
+
+
     plt.show()
-
-    print("ellepse time %f" % (time.perf_counter() - t))
-
 
         #start counter
 
@@ -156,12 +149,14 @@ iniRobots(robots)
 #thread.join()
 
         #Print posistions
+#for i in range(100):
+ #   print(i,get_pose(robots)[i])
 
-for i in range(100):
-    print(i,get_pose(robots)[i])
+robots[1].foward(1)
+print(robots[1].x, robots[1].y,robots[1].oriant)
 
-        #creating numpy array from object lists
-random_oriant(robots)
-        #plot robots
+
+    #plot robots
 plot(robots)
 
+print("ellepse time %f" % (time.perf_counter() - t))
