@@ -87,13 +87,14 @@ def shuffle_pose(rList, shuffles):
     robo = 0
     x = 0
     y = 0
-    while(robo < 5):
+    while(robo < shuffles):
         x = robo*5
         y = x + 5
-        random_pose(rList, x, y)   
-        print("------------------------itteration: %d------------------------"% robo)    
+        random_pose(rList, x, y)    
         robo += 1
         time.sleep(1)
+    if robo == shuffles:
+        return True
 
 def plot(robots):
     pass
@@ -103,12 +104,7 @@ def update_array(robots):
             robots_x[i] = robots[i].x
             robots_y[i] = robots[i].y
             robots_oriant[i] = robots[i].oriant   
-    #label's
-    #ax.quiverkey(q, X=0.3, Y=1.1, U=1, label='Robots', labelpos='E')
 
-
-
-    
 
         #start counter
 
@@ -131,54 +127,46 @@ for i in range(100):
         robots_oriant.append(i)
 
 
-        #threading shuffle function so my program can run multiple thing at a time.
+        #threading the shuffle function so my program can run multiple thing at a time.
+        #i rather thread the draw function (work in progres)
 
-thread = threading.Thread(target=shuffle_pose, args=[robots])
+shuffleTime = 20
+
+thread = threading.Thread(target=shuffle_pose, args=[robots, shuffleTime])
 thread.start()
-#thread.join()
 
-        #Print posistions
-#for i in range(100):
-#    print(i,get_pose(robots)[i])
-
-
-    #plot robots
-
-
-
-    #create numpy array's
-
-
-
-
-#plot
+#------------------------ Plot(x,y,oriant)
+#options. make a list of a list...
+#dictionary
 
 fig, ax = plt.subplots()
-plt.ion()
+#label's
+#ax.quiverkey(q, X=0.3, Y=1.1, U=1, label='Robots', labelpos='E')
 
-for t in range(20):
+while(t + shuffleTime > time.perf_counter()):
+
     print("update plot %d "% t)
     update_array(robots)
+
     X = np.array(robots_x)
     Y = np.array(robots_y)
     U = np.cos(np.array(robots_oriant))
     V = np.sin(np.array(robots_oriant))
     q = ax.quiver(X, Y, U, V)
+
     plt.draw()
-    plt.pause(0.4)
+    plt.pause(0.2)
     ax.cla()
 
 
-
-
-
-
-
-
-
-
-
-
-
+input("press something to exit...........")
 
 print("ellepse time %f" % (time.perf_counter() - t))
+
+
+
+#Print posistions
+#for i in range(100):
+#    print(i,get_pose(robots)[i])
+
+    #plot robots & create numpy array's
