@@ -67,8 +67,8 @@ def iniRobots(rList):
 
 def random_pose(rList, x=0, y=100):
     for x in range(y):
-        rList[x].x = int(random.uniform(0,100))
-        rList[x].y = int(random.uniform(0,100))
+        rList[x].x = int(random.uniform(0,20))
+        rList[x].y = int(random.uniform(0,20))
         #rList[x].oriant = random.uniform(0,2*math.pi)
     
 def get_pose(rList):
@@ -83,11 +83,11 @@ def random_oriant(rList):
     for i in range(100):
         rList[i].oriant = random.uniform(0,2*math.pi)
 
-def shuffle_pose(rList):
+def shuffle_pose(rList, shuffles):
     robo = 0
     x = 0
     y = 0
-    while(robo < 20):
+    while(robo < 5):
         x = robo*5
         y = x + 5
         random_pose(rList, x, y)   
@@ -96,41 +96,19 @@ def shuffle_pose(rList):
         time.sleep(1)
 
 def plot(robots):
-
-    #create numpy array's
-
-    robots_x = []
-    robots_y = []
-    robots_oriant = []
-
+    pass
+ 
+def update_array(robots):
     for i in range(100):
-        robots_x.append(i)
-        robots_y.append(i)
-        robots_oriant.append(i)
-
-        robots_x[i] = robots[i].x
-        robots_y[i] = robots[i].y
-        robots_oriant[i] = robots[i].oriant
-
-
-
-    #Plot
-    fig, ax = plt.subplots()
-
-    X = np.array(robots_x)
-    Y = np.array(robots_y)
-    U = np.cos(np.array(robots_oriant))
-    V = np.sin(np.array(robots_oriant))
-
-    q = ax.quiver(X, Y, U, V)
-   
-   
+            robots_x[i] = robots[i].x
+            robots_y[i] = robots[i].y
+            robots_oriant[i] = robots[i].oriant   
     #label's
     #ax.quiverkey(q, X=0.3, Y=1.1, U=1, label='Robots', labelpos='E')
 
 
 
-    plt.show()
+    
 
         #start counter
 
@@ -142,21 +120,65 @@ t = time.perf_counter()
 robots = []
 iniRobots(robots)
 
+robots_x = []
+robots_y = []
+robots_oriant = []
+
+
+for i in range(100):
+        robots_x.append(i)
+        robots_y.append(i)
+        robots_oriant.append(i)
+
+
         #threading shuffle function so my program can run multiple thing at a time.
 
-#thread = threading.Thread(target=shuffle_pose, args=[robots])
-#thread.start()
+thread = threading.Thread(target=shuffle_pose, args=[robots])
+thread.start()
 #thread.join()
 
         #Print posistions
 #for i in range(100):
- #   print(i,get_pose(robots)[i])
-
-robots[1].foward(1)
-print(robots[1].x, robots[1].y,robots[1].oriant)
+#    print(i,get_pose(robots)[i])
 
 
     #plot robots
-plot(robots)
+
+
+
+    #create numpy array's
+
+
+
+
+#plot
+
+fig, ax = plt.subplots()
+plt.ion()
+
+for t in range(20):
+    print("update plot %d "% t)
+    update_array(robots)
+    X = np.array(robots_x)
+    Y = np.array(robots_y)
+    U = np.cos(np.array(robots_oriant))
+    V = np.sin(np.array(robots_oriant))
+    q = ax.quiver(X, Y, U, V)
+    plt.draw()
+    plt.pause(0.4)
+    ax.cla()
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 print("ellepse time %f" % (time.perf_counter() - t))
