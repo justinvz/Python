@@ -78,10 +78,10 @@ def get_pose(rList):
         poseList[i] = rList[i].pose()
     return poseList
 
-def random_oriant(rList):
+def random_oriant(rList, x=0 , y=100):
 
-    for i in range(100):
-        rList[i].oriant = random.uniform(0,2*math.pi)
+    for x in range(y):
+        rList[x].oriant = random.uniform(0,2*math.pi)
 
 def shuffle_pose(rList, shuffles):
     robo = 0
@@ -91,19 +91,16 @@ def shuffle_pose(rList, shuffles):
         x = robo*5
         y = x + 5
         random_pose(rList, x, y)    
+        random_oriant(rList, x, y)
         robo += 1
         time.sleep(1)
-    if robo == shuffles:
-        return True
-
-def plot(robots):
-    pass
- 
+  
 def update_array(robots):
     for i in range(100):
             robots_x[i] = robots[i].x
             robots_y[i] = robots[i].y
-            robots_oriant[i] = robots[i].oriant   
+            robots_oriant[i] = robots[i].oriant
+
 
 
         #start counter
@@ -116,15 +113,10 @@ t = time.perf_counter()
 robots = []
 iniRobots(robots)
 
-robots_x = []
-robots_y = []
-robots_oriant = []
+robots_x = np.linspace(1,100,100)
+robots_y = np.linspace(1,100,100)
+robots_oriant = np.linspace(1,100,100)
 
-
-for i in range(100):
-        robots_x.append(i)
-        robots_y.append(i)
-        robots_oriant.append(i)
 
 
         #threading the shuffle function so my program can run multiple thing at a time.
@@ -133,6 +125,7 @@ for i in range(100):
 shuffleTime = 20
 
 thread = threading.Thread(target=shuffle_pose, args=[robots, shuffleTime])
+
 thread.start()
 
 #------------------------ Plot(x,y,oriant)
@@ -143,12 +136,13 @@ fig, ax = plt.subplots()
 #label's
 #ax.quiverkey(q, X=0.3, Y=1.1, U=1, label='Robots', labelpos='E')
 
+
 while(t + shuffleTime > time.perf_counter()):
 
-    print("update plot %d "% t)
     update_array(robots)
 
-    X = np.array(robots_x)
+
+    X = robots_x
     Y = np.array(robots_y)
     U = np.cos(np.array(robots_oriant))
     V = np.sin(np.array(robots_oriant))
@@ -158,15 +152,21 @@ while(t + shuffleTime > time.perf_counter()):
     plt.pause(0.2)
     ax.cla()
 
+ 
 
-input("press something to exit...........")
+robo_pose = np.array([[robots_x],[robots_y],[robots_oriant]]) 
 
-print("ellepse time %f" % (time.perf_counter() - t))
+robo_pose.mean(axis=0)
+
+robo_pose.std(axis=0)
 
 
 
 #Print posistions
-#for i in range(100):
-#    print(i,get_pose(robots)[i])
 
+
+
+#input("press something to exit...........")
+
+print("ellepse time %f" % (time.perf_counter() - t))
     #plot robots & create numpy array's
