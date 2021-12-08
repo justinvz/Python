@@ -1,9 +1,6 @@
 import cv2
 import numpy as np
 
-
-print("Test Test Test Test!!!!!")
-
 confThreshold = 0.5
 nmsThershold = 0.3
 
