@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-from numpy.core.defchararray import index
+
 
 confThreshold = 0.5
 nmsThershold = 0.3
@@ -13,8 +13,8 @@ with open(classesFile, 'rt') as file:
 cap = cv2.VideoCapture(0)
 whT = 320
 
-modelConfiguration = 'yolov3.cfg'
-modelWeights = 'yolov3.weights'
+modelConfiguration = 'yolov3-tiny.cfg'
+modelWeights = 'yolov3-tiny.weights'
 
 net = cv2.dnn.readNetFromDarknet(modelConfiguration, modelWeights)
 
